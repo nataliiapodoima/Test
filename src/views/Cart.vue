@@ -2,13 +2,14 @@
     <div>
         <h1>Vue Cart</h1>
         <ul>
-            <li v-for="item in items" :key="item.id">
-                <img :src="item.imgsrc" :alt="item.name">
+            <li v-for="item in books" :key="item.id">
+                <div>{{ item.id }}</div>
+                <!-- <img :src="item.imgsrc" :alt="item.name">
                 <div class="item_info_wrapper">
                     <div class="item_name">{{ item.name }}</div>
                     <div class="item_price">${{ item.price }}</div>
                     <DetailsButton :itemId="item.id" />
-                </div>
+                </div> -->
             </li>
         </ul>
     </div>
@@ -18,24 +19,55 @@
 <script lang="ts">
 
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import Product from '@/models/Product.ts';
+import Book from '@/models/Book.ts';
 import DetailsButton from '@/components/DetailsButton.vue'
+import getData from '@/data/getData.ts';
 
+const newLocal='http://fakerestapi.azurewebsites.net/api/Books';
 @Component({
   components: {
     DetailsButton
   }
 })
 
+// export default class Cart extends Vue {
+//     items: Array<Product> = [
+//         new Product(1, 'Notebook 1', 30, require('@/assets/7nl76pa-hp-14s-dk0089au-14-inch-laptop.jpg')), 
+//         new Product(2, 'Notebook 2', 60, require('@/assets/80d57feac746c94ab094374eea5591662e90ff558c448b879c58861e57f882f7.jpg')), 
+//         new Product(3, 'Notebook 3', 50, require('@/assets/m509da-br139t-asus-vivobook-m509-laptop.jpg')), 
+//         new Product(4, 'Notebook 4', 45, require('@/assets/mi_note_1.jpg')), 
+//         new Product(5, 'Notebook 5', 55, require('@/assets/MicrosoftSurfaceLaptop3-15__1__02.jpg')), 
+//         new Product(6, 'Notebook 6', 85, require('@/assets/02107b3c662d9bcfb778e7b95aec7d0b625d08873db3ccdd143f266e905ebbda.jpg'))
+//     ]
+// }
+
 export default class Cart extends Vue {
-    items: Array<Product> = [
-        new Product(1, 'Notebook 1', 30, require('@/assets/7nl76pa-hp-14s-dk0089au-14-inch-laptop.jpg')), 
-        new Product(2, 'Notebook 2', 60, require('@/assets/80d57feac746c94ab094374eea5591662e90ff558c448b879c58861e57f882f7.jpg')), 
-        new Product(3, 'Notebook 3', 50, require('@/assets/m509da-br139t-asus-vivobook-m509-laptop.jpg')), 
-        new Product(4, 'Notebook 4', 45, require('@/assets/mi_note_1.jpg')), 
-        new Product(5, 'Notebook 5', 55, require('@/assets/MicrosoftSurfaceLaptop3-15__1__02.jpg')), 
-        new Product(6, 'Notebook 6', 85, require('@/assets/02107b3c662d9bcfb778e7b95aec7d0b625d08873db3ccdd143f266e905ebbda.jpg'))
-    ]
+    
+    books = new Array<Book>();
+
+    mounted() {
+        const url  = 'http://fakerestapi.azurewebsites.net/api/Books';
+        getData.getTestData(url).then((response: any) => {
+            this.books = response.data;
+            // console.log(this.books);
+
+        }).catch((error:any)=>{
+            
+        })
+    }
+    
+
+    // mounted() {
+    //     console.log(this.items);
+    // }
+    // mounted() {
+    //     const url = 'http://fakerestapi.azurewebsites.net/api/Books';
+    //     // getData.getTestData(url).then(response => (this.items = response));
+    //     this.items = getData.getTestData(url);
+    // }
+
+
+
 }
 
 </script>
