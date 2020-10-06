@@ -1,5 +1,8 @@
 export default class Book {
-    id = 0;
-    title = '';
-    description = 0;
+    ID = 0;
+    Title = '';
+    PublishDate = '';
+    PageCount = 0;
+    Excerpt = '';
+    Description = 0;
 }

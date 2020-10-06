@@ -1,5 +1,5 @@
 <template>
-    <button v-on:click="show()">Show details</button>
+    <v-btn v-on:click="show()">Show details</v-btn>
 </template>
 
 
@@ -17,8 +17,11 @@ export default class DetailsButton extends Vue {
 </script>
 
 <style lang="scss">
-    button {
-        padding: 0.5rem;
-        background-color: #0f3;
-    }
+    // button {
+    //     padding: 1.1rem 1.5rem;
+    //     background-color: #9c9;
+    //     border-radius: 1rem;
+    //     border: solid 2px #999;
+    //     font-size: 1.2rem;
+    // }
 </style>
